@@ -1,0 +1,25 @@
+@import com.makskostyshen.web.dto.CaseListingResponseDto;
+
+@args(Integer rowNumber, CaseListingResponseDto caseDto)
+
+<tr>
+    <th scope="row">@rowNumber</th>
+    <td>@caseDto.getClient()</td>
+    <td>@caseDto.getOpponent()</td>
+    <td>@caseDto.getSubject()</td>
+    <td>@caseDto.getNumber()</td>
+    <td>@caseDto.getJudge()</td>
+    <td>@caseDto.getDoneWork()</td>
+    <td>@caseDto.getCurrentStage()</td>
+    <td>@caseDto.getCurrentStageDeadline()</td>
+    <td>@caseDto.getNote()</td>
+    <td>
+        <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li><a class="dropdown-item" href="#">Редагувати</a></li>
+                <li><a class="dropdown-item" href="#">Видалити</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>

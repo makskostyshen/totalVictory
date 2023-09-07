@@ -14,10 +14,25 @@ repositories {
 
 dependencies {
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.views:micronaut-views-rocker")
+    implementation("com.opencsv:opencsv:4.1")
+
     runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("io.micronaut:micronaut-http-client")
+
+    ///lombok
+    compileOnly("org.projectlombok:lombok:1.18.28")
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.28")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.28")
+
+    //mapstruct
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 }
 
 
@@ -38,8 +53,6 @@ micronaut {
         annotations("com.makskostyshen.*")
     }
     aot {
-    // Please review carefully the optimizations enabled below
-    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
         optimizeServiceLoading = false
         convertYamlToJava = false
         precomputeOperations = true
@@ -55,7 +68,7 @@ rocker {
     configurations {
         main {
             templateDir = file("src/main/resources")
-            outputDir = file("src/generated/rocker")
+            outputDir = file("build/classes/java/rocker")
         }
     }
 }
