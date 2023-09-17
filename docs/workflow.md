@@ -1,7 +1,7 @@
 # Workflow & developing process of this project
 Here you can find all needed information about development process of this project.
 
-## Process
+## Process of working on task
 1. You need to take an issue to work. Available issues are located in **"Open"** column. When you chose the desirable issue:
    - Move it to **"In progress"** column
    - Assign yourself
@@ -28,7 +28,13 @@ Here you can find all needed information about development process of this proje
    - Feel free to ask additional questions
    - If you disagree with comment, explain it, move to **"Tech review & test"** and assign responsible person
 
+## Priorities
 
+In case of multiple tasks on the same board, there is a priority of each stage:
+1. Ready to merge
+2. Feedback
+3. In progress
+4. Open
 
 ## Issues
 Every issue corresponds to its task. It has name and description. For example:
@@ -48,5 +54,24 @@ When working with task on every day basis, you need to track your time:
 - **read doc of framework x**
 - **create controller**
 - **...**
+
+## Branches
+
+Branch should have the name of its issue:
+
+- Issue: **vict-69: [Backup] - add backup file (1h)**
+- Branch: **vict-69**
+
+Work, related to specific issue needs to be done only in its branch
+
+## Commits
+
+Every commit should be explained by its name. Name should be specific.
+Name convention on example:
+
+**vict-69: Create repository methods**
+
+- **vict-69:** - name of task, every commit should start from name of branch
+- **Create repository methods** - what was done
 
 Contact me in case of any suggestions or improvements
