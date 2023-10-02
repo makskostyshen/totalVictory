@@ -1,28 +1,37 @@
-## Micronaut 4.1.0 Documentation
+# Total victory
 
-- [User Guide](https://docs.micronaut.io/4.1.0/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.1.0/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.1.0/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+### Overview
+Welcome to the Total victory - an application designed to streamline the daily tasks of legal professionals. This tool is here to simplify the lives of lawyers by helping them prioritize cases, create new ones, and efficiently manage their workload.
 
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-## Feature micronaut-aot documentation
+### Features:
+- Case Prioritization: Easily prioritize cases based on dates and deadlines, ensuring that you focus on what matters most.
 
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+- Case Creation and Updates: Quickly create new cases with all the essential details, and effortlessly update existing ones as the legal landscape evolves.
 
+- Task Management: Keep track of tasks related to each case, set deadlines, and mark them as completed to stay organized and on top of your workload.
 
-## Feature views-rocker documentation
+- User-Friendly Interface: The intuitive and user-friendly interface ensures that legal professionals of all tech levels can easily navigate and use the tool.
 
-- [Micronaut Rocker Views documentation](https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#rocker)
+### Getting Started
 
-- [https://github.com/fizzed/rocker](https://github.com/fizzed/rocker)
+Total Victory is supported now only in Windows.
 
+To get started with the Total victory, follow these steps:
 
-## Feature serialization-jackson documentation
+- Clone the repository to your local machine:
+  ```
+  git clone https://github.com/makskostyshen/totalVictory.git
+  ```
+- Install [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to your machine. It is important to do it correctly, with specifying PATH parameter in your system. Here is the [instruction](https://www.geeksforgeeks.org/how-to-set-java-path-in-windows-and-linux/)
+- Create a directory for project anywhere on your PC, paste cases.csv file there
+- Build the project, go to `build/libs/totalVictory-0.1-all.jar` and copy it to desired directory
+- Create a .bat file with these commands:
 
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+```
+start "" "http://localhost:8080"
+java -jar "totalVictory-0.1-all.jar"
+```
 
+To start a project, simply double-click this batch file
 
+In case of any questions, feel free to contact me makskostyshen@gmail.com
