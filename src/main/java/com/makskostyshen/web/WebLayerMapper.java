@@ -8,6 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Mapper
 public abstract class WebLayerMapper {
@@ -18,6 +19,17 @@ public abstract class WebLayerMapper {
     public abstract CaseListingResponseDto map(final CaseEntity entity);
 
     protected String map(final LocalDateTime dateTime) {
+        if (Objects.isNull(dateTime)) {
+            return "...";
+        }
         return dateTime.format(formatter);
     }
+
+    protected String map(final String stringField) {
+        if (stringField.isEmpty()) {
+            return "...";
+        }
+        return stringField;
+    }
+
 }
