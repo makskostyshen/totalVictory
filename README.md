@@ -25,7 +25,7 @@ To get started with the Total victory, follow these steps:
 - Install [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to your machine. It is important to do it correctly, with specifying PATH parameter in your system. Here is the [instruction](https://www.geeksforgeeks.org/how-to-set-java-path-in-windows-and-linux/)
 - Create a directory for project anywhere on your PC, paste cases.csv file there
 - Build the project, go to `build/libs/totalVictory-0.1-all.jar` and copy it to this directory
-- Create a .bat file with these commands:
+- Create a .bat file in this directory with commands:
 
 ```
 start "" "http://localhost:8080"
