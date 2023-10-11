@@ -5,6 +5,7 @@ import com.makskostyshen.data.entity.CaseEntity;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Singleton
@@ -17,6 +18,7 @@ public class CaseRepositoryImpl implements CaseRepository {
     public List<CaseEntity> findAll() {
         return reader.read().stream()
                 .map(DataLayerMapper.I::map)
+                .sorted(Comparator.comparing(CaseEntity::getCurrentStageDeadline, Comparator.nullsLast(Comparator.naturalOrder())))
                 .toList();
     }
 }
