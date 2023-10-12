@@ -14,20 +14,22 @@ import java.util.Objects;
 public abstract class WebLayerMapper {
     public static WebLayerMapper I = Mappers.getMapper(WebLayerMapper.class);
 
+    private final String EMPTY_FIELD_VALUE = "...";
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public abstract CaseListingResponseDto map(final CaseEntity entity);
 
     protected String map(final LocalDateTime dateTime) {
         if (Objects.isNull(dateTime)) {
-            return "...";
+            return EMPTY_FIELD_VALUE;
         }
         return dateTime.format(formatter);
     }
 
     protected String map(final String stringField) {
         if (stringField.isEmpty()) {
-            return "...";
+            return EMPTY_FIELD_VALUE;
         }
         return stringField;
     }
