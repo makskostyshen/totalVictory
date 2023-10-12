@@ -16,6 +16,9 @@ public abstract class DataLayerMapper {
     public abstract CaseEntity map(final CaseCsvModel csvModel);
 
     protected LocalDateTime mapToLocalDateTime(final String dateTimeValue) {
+        if (dateTimeValue.isEmpty()) {
+            return null;
+        }
         return LocalDateTime.parse(dateTimeValue, formatter);
     }
 }
