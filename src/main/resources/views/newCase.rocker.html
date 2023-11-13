@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@option targetCharset=UTF-8
+@args()
 
-<head>
-    <!-- Add your meta tags, title, and CSS links here -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Нова справа</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-
+@views.mainScript.template("Нова справа") -> {
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
             <h5>Створити нову справу</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body mt-3">
             <form>
-
                 <div class="form-group">
                     <label for="currentStage">Стадія розгляду</label>
                     <input type="text" class="form-control" id="currentStage">
@@ -78,8 +68,4 @@
         </div>
     </div>
 </div>
-
-
-</body>
-
-</html>
+}
