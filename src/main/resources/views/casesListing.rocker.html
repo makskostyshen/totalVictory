@@ -3,19 +3,12 @@
 
 @args(List<CaseListingResponseDto> casesDto)
 
-
-@views.mainScript.template("Справи") -> {
+@views.mainScript.template() -> {
 <div class="card-body">
     <div class="d-flex justify-content-between align-items-center mb-2 mt-2 px-1">
         <h5 class="card-title">Справи</h5>
         <button type="button" class="btn btn-primary" onclick="window.location.href='/cases/new'">Нова справа</button>
     </div>
-
-    <!-- Bordered Table -->
-    <table class="table table-bordered mt-0 mb-0">
-        <!-- Заголовок таблиці і т.д. ... -->
-    </table>
-
 
     <!-- Bordered Table -->
     <table class="table table-bordered">

@@ -4,7 +4,9 @@ import com.makskostyshen.data.api.CaseRepository;
 import com.makskostyshen.web.WebLayerMapper;
 import com.makskostyshen.web.dto.CaseListingResponseDto;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Produces;
 import io.micronaut.views.rocker.RockerWritable;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,6 @@ public class CasesListingController {
                 .map(WebLayerMapper.I::map)
                 .toList();
 
-        return HttpResponse.ok(new RockerWritable(views.casesListing.template(cases))); // (3)
+        return HttpResponse.ok(new RockerWritable(views.casesListing.template(cases)));
     }
 }
