@@ -1,0 +1,69 @@
+@views.mainScript.template() -> {
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5>Створити нову справу</h5>
+        </div>
+        <div class="card-body mt-3">
+            <form>
+                <div class="form-group">
+                    <label for="currentStage">Стадія розгляду</label>
+                    <input type="text" class="form-control" id="currentStage">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Дата і час</label>
+                    <input type="text" class="form-control" id="stageDeadline">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Суд / суддя</label>
+                    <input type="text" class="form-control" id="judge">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Номер Справи</label>
+                    <input type="text" class="form-control" id="number">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Опонент</label>
+                    <input type="text" class="form-control" id="opponent">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Предмет спору</label>
+                    <input type="text" class="form-control" id="subject">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Клієнт</label>
+                    <input type="text" class="form-control" id="client">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentStage">Примітка</label>
+                    <input type="text" class="form-control" id="note">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="doneWork">Проведена робота</label>
+                    <textarea class="form-control" id="doneWork" rows="3"></textarea>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='/cases'">Назад</button>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='/cases'">Створити</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+}
