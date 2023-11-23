@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Serdeable
 public class CaseListingResponseDto {
     private String client;
 
