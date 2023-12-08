@@ -2,7 +2,7 @@ package com.makskostyshen.web;
 
 
 import com.makskostyshen.data.entity.CaseEntity;
-import com.makskostyshen.web.dto.CaseListingResponseDto;
+import com.makskostyshen.web.dto.CaseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -16,9 +16,9 @@ public abstract class WebLayerMapper {
 
     private final String EMPTY_FIELD_VALUE = "...";
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
-    public abstract CaseListingResponseDto map(final CaseEntity entity);
+    public abstract CaseDto map(final CaseEntity entity);
 
     protected String map(final LocalDateTime dateTime) {
         if (Objects.isNull(dateTime)) {

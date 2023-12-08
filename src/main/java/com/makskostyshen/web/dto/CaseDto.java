@@ -1,6 +1,5 @@
 package com.makskostyshen.web.dto;
 
-import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.*;
 
@@ -11,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Serdeable
-public class CaseListingResponseDto {
+public class CaseDto {
     private String client;
 
     private String opponent;
