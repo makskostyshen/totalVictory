@@ -29,7 +29,7 @@ To get started with the Total victory, follow these steps:
 
 ```
 start "" "http://localhost:8080"
-java -jar "totalVictory-0.1-all.jar"
+java -jar "totalVictory-0.1-all.jar" -Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8
 ```
 
 To start a project, simply double-click this batch file
