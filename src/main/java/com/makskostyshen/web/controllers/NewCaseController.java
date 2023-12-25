@@ -1,6 +1,6 @@
 package com.makskostyshen.web.controllers;
 
-import com.makskostyshen.web.dto.CaseListingResponseDto;
+import com.makskostyshen.web.dto.CaseDetailsDto;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.views.rocker.RockerWritable;
@@ -21,7 +21,7 @@ public class NewCaseController {
     @Post
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public HttpResponse<?> createCase(@Body CaseListingResponseDto request) {
+    public HttpResponse<?> createCase(@Body CaseDetailsDto request) {
         // Виконайте валідацію та інші операції створення справи
         // Виведіть справу у консоль або збережіть у базі даних
 

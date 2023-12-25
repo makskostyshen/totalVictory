@@ -2,7 +2,7 @@ package com.makskostyshen.web.controllers;
 
 import com.makskostyshen.data.api.CaseRepository;
 import com.makskostyshen.web.WebLayerMapper;
-import com.makskostyshen.web.dto.CaseListingResponseDto;
+import com.makskostyshen.web.dto.CaseDto;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -22,7 +22,7 @@ public class CasesListingController {
     @Get
     @Produces(TEXT_HTML)
     public HttpResponse<?> get() {
-        List<CaseListingResponseDto> cases = repository.findAll()
+        List<CaseDto> cases = repository.findAll()
                 .stream()
                 .map(WebLayerMapper.I::map)
                 .toList();
