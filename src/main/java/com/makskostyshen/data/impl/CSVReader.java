@@ -19,9 +19,10 @@ public class CSVReader {
 
     public List<CaseCsvModel> read() {
         try {
-            return new CsvToBeanBuilder<CaseCsvModel>(
-                    new FileReader(fileName, StandardCharsets.UTF_8))
-                    .withType(CaseCsvModel.class).build().parse();
+            return new CsvToBeanBuilder<CaseCsvModel>(new FileReader(fileName, StandardCharsets.UTF_8))
+                    .withType(CaseCsvModel.class)
+                    .build()
+                    .parse();
         } catch (IOException e) {
             throw new CSVReadException(e);
         }

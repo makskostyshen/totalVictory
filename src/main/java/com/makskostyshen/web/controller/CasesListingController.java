@@ -1,4 +1,4 @@
-package com.makskostyshen.web.controllers;
+package com.makskostyshen.web.controller;
 
 import com.makskostyshen.data.api.CaseRepository;
 import com.makskostyshen.web.WebLayerMapper;

@@ -34,7 +34,7 @@ public class CaseCsvModel {
     @CsvBindByName(column = "current_stage")
     private String currentStage;
 
-    @CsvBindByName(column = "stage_deadline")
+    @CsvBindByName(column = "current_stage_deadline")
     private String currentStageDeadline;
 
     @CsvBindByName(column = "note")

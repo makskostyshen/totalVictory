@@ -14,11 +14,19 @@ public abstract class DataLayerMapper {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public abstract CaseEntity map(final CaseCsvModel csvModel);
+    public abstract CaseCsvModel map(final CaseEntity caseEntity);
 
     protected LocalDateTime mapToLocalDateTime(final String dateTimeValue) {
-        if (dateTimeValue.isEmpty()) {
+        if (dateTimeValue == null || dateTimeValue.isEmpty()) {
             return null;
         }
         return LocalDateTime.parse(dateTimeValue, formatter);
+    }
+
+    protected String mapLocalDateTime(final LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.format(formatter);
     }
 }
