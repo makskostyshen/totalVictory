@@ -30,7 +30,7 @@ public class CaseRepositoryImpl implements CaseRepository {
 
     @Override
     public void save(final CaseEntity caseEntity) {
-        if (caseEntity.getId() == null) {
+        if (caseEntity.getId() == null || caseEntity.getId().isEmpty()) {
             saveNewCase(caseEntity);
         } else {
             saveUpdatedCase(caseEntity);
