@@ -20,12 +20,12 @@ public class CSVWriter {
     @Property(name = "app.cases.fileName")
     private String fileName;
 
-    public void write(final List<CaseEntity> cases) {
+    public void write(final List<CaseCsvModel> cases) {
 
         try {
             Writer writer = new FileWriter(fileName);
             StatefulBeanToCsv<CaseCsvModel> beanToCsv = new StatefulBeanToCsvBuilder<CaseCsvModel>(writer).build();
-            beanToCsv.write(cases.stream().map(DataLayerMapper.I::map).toList());
+            beanToCsv.write(cases);
             writer.close();
         } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
             throw new CSVWriteException(e);

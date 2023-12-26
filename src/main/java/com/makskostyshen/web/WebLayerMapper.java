@@ -30,6 +30,8 @@ public abstract class WebLayerMapper {
 
     public abstract CaseEntity map(final CaseDetailsDto detailsDto);
 
+    public abstract CaseDetailsDto mapToDetails(CaseEntity caseEntity);
+
     protected LocalDate mapToLocalDate(final String dateValue) {
         if (dateValue == null || dateValue.isEmpty()) {
             return null;
@@ -54,11 +56,24 @@ public abstract class WebLayerMapper {
         }
     }
 
+    protected String mapLocalDate(final LocalDate date) {
+        if (date == null) {
+            return null;
+        }
+        return date.format(standardSystemDateFormatter);
+    }
+
+    protected String mapLocalTime(final LocalTime time) {
+        if (time == null) {
+            return null;
+        }
+        return time.format(standardSystemTimeFormatter);
+    }
+
     protected String map(final String stringField) {
         if (stringField.isEmpty()) {
             return EMPTY_FIELD_VALUE;
         }
         return stringField;
     }
-
 }

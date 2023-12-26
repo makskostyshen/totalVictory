@@ -4,6 +4,7 @@ import com.makskostyshen.data.entity.CaseEntity;
 import com.makskostyshen.data.impl.CSVReader;
 import com.makskostyshen.data.impl.CSVWriter;
 import com.makskostyshen.data.impl.CaseRepositoryImpl;
+import com.makskostyshen.data.impl.DataLayerMapper;
 import io.micronaut.context.annotation.Property;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -35,11 +36,11 @@ class CaseRepositoryTest {
                 null
         );
         List<CaseEntity> initCases = initRepository.findAll();
-        writer.write(initCases);
+        writer.write(initCases.stream().map(DataLayerMapper.I::map).toList());
     }
 
     @Test
-    void shouldSaveCaseWithNoDateAndTimeInTheEnd() {
+    void shouldSaveNewCaseWithNoDateAndTimeInTheEnd() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -61,7 +62,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithNoDateBeforeCasesWithNoDateAndTime() {
+    void shouldSaveNewCaseWithNoDateBeforeCasesWithNoDateAndTime() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -84,7 +85,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithSmallestDateInTheBeginning() {
+    void shouldSaveNewCaseWithSmallestDateInTheBeginning() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -107,7 +108,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithRepeatingDateButDifferentTimeCorrectly() {
+    void shouldSaveNewCaseWithRepeatingDateButDifferentTimeCorrectly() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
