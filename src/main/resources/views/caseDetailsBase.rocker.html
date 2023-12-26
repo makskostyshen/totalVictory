@@ -1,12 +1,13 @@
 @import com.makskostyshen.web.dto.CaseDetailsDto;
 
-@args(CaseDetailsDto details, String pageTitle, String actionUrl, String actionButtonName)
+@args(CaseDetailsDto details, String pageTitle, String actionUrl, RockerBody actionButtons)
 
 @views.mainScript.template() -> {
 
 <div class="container">
-    <div class="mb-2 mt-2 px-1">
+    <div class="d-flex justify-content-between align-items-center mb-2 mt-2 px-1">
         <h5 class="card-title">@pageTitle</h5>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/cases'">Назад</button>
     </div>
     <div class="card">
         <div class="card-body mt-3">
@@ -60,21 +61,12 @@
                     <input type="text" id="noteId" name="note" value="@?details.getNote()" class="form-control">
                 </div>
 
-
                 <div class="form-group">
                     <label for="doneWorkId">Проведена робота</label>
                     <textarea class="form-control" id="doneWorkId" name="doneWork" rows="8">@?details.getDoneWork()</textarea>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='/cases'">Назад</button>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <input type="submit" class="btn btn-primary btn-block" value="@actionButtonName">
-                    </div>
-                </div>
+                @actionButtons
             </form>
         </div>
     </div>
