@@ -1,7 +1,6 @@
 package com.makskostyshen.web.controller;
 
 import com.makskostyshen.data.api.CaseRepository;
-import com.makskostyshen.web.WebLayerMapper;
 import com.makskostyshen.web.dto.CaseDetailsDto;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -25,7 +24,7 @@ public class CaseDetailsController {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> post(@Body CaseDetailsDto caseDetailsDto) {
-        repository.save(WebLayerMapper.I.map(caseDetailsDto));
+        System.out.println("id is " + caseDetailsDto.getId());
         return HttpResponse.seeOther(UriBuilder.of("/cases").build());
     }
 }

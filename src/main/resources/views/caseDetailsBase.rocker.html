@@ -1,14 +1,14 @@
 @import com.makskostyshen.web.dto.CaseDetailsDto;
 
-@args(CaseDetailsDto details, String actionUrl, String actionButtonName)
+@args(CaseDetailsDto details, String pageTitle, String actionUrl, String actionButtonName)
 
 @views.mainScript.template() -> {
 
-<div class="container mt-5">
+<div class="container">
+    <div class="mb-2 mt-2 px-1">
+        <h5 class="card-title">@pageTitle</h5>
+    </div>
     <div class="card">
-        <div class="card-header">
-            <h5>Створити нову справу</h5>
-        </div>
         <div class="card-body mt-3">
             <form action="@actionUrl" method="post">
                 <input type="text" value="@?details.getId()" hidden="" name="id" class="d-none" id="id-input">
