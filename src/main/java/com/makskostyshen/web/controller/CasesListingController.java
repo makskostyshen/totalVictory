@@ -7,8 +7,6 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.views.rocker.RockerWritable;
 import lombok.RequiredArgsConstructor;
 
@@ -24,18 +22,6 @@ public class CasesListingController {
     @Get
     @Produces(TEXT_HTML)
     public HttpResponse<?> get() {
-        return getAllCasesPage();
-    }
-
-    @Delete("/{id}")
-    @Produces(TEXT_HTML)
-    public HttpResponse<?> delete(@PathVariable final String id) {
-        repository.deleteById(id);
-        return getAllCasesPage();
-    }
-
-    private HttpResponse<?> getAllCasesPage() {
-
         List<CaseDto> cases = repository.findAll()
                 .stream()
                 .map(WebLayerMapper.I::map)
