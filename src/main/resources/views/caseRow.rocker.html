@@ -18,8 +18,19 @@
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li><a class="dropdown-item" href="/cases/details/@caseDto.getId()">Детально</a></li>
-                <li><a class="dropdown-item" href="#">Видалити</a></li>
+                <li><a class="dropdown-item" id="@caseDto.getId()-deleteId" href="#">Видалити</a></li>
             </ul>
         </div>
     </td>
 </tr>
+
+<script>
+    console.log("/cases/@caseDto.getId()")
+    document.getElementById("@caseDto.getId()-deleteId").addEventListener("click", function(event) {
+        event.preventDefault()
+
+        fetch("/cases/@caseDto.getId()", {
+            method: "DELETE"
+        })
+    })
+</script>

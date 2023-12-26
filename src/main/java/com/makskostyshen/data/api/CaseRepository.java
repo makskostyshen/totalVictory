@@ -11,4 +11,6 @@ public interface CaseRepository {
     void save(CaseEntity caseEntity);
 
     Optional<CaseEntity> findById(String id);
+
+    void deleteById(String id);
 }

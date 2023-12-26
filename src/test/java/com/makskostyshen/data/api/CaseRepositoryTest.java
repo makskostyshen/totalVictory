@@ -5,6 +5,7 @@ import com.makskostyshen.data.impl.CSVReader;
 import com.makskostyshen.data.impl.CSVWriter;
 import com.makskostyshen.data.impl.CaseRepositoryImpl;
 import com.makskostyshen.data.impl.DataLayerMapper;
+import com.makskostyshen.exception.CaseNotFoundException;
 import io.micronaut.context.annotation.Property;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @MicronautTest(propertySources = {"application.properties"})
 class CaseRepositoryTest {
@@ -204,5 +206,42 @@ class CaseRepositoryTest {
         assertEquals(cases.get(3).getId(), "3");
         assertEquals(cases.get(4).getId(), "4");
         assertEquals(cases.get(5).getId(), "5");
+    }
+
+    @Test
+    void shouldDeleteExistingCaseSuccessfully() {
+        //given
+        loadInitCases();
+        //when
+        repository.deleteById("4");
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 4);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "2");
+        assertEquals(cases.get(2).getId(), "3");
+        assertEquals(cases.get(3).getId(), "5");
+    }
+
+    @Test
+    void shouldThrowExceptionWhenCannotDeleteNonExisting() {
+        //given
+        loadInitCases();
+
+        //when, then
+        assertThrows(
+                CaseNotFoundException.class,
+                () -> repository.deleteById("non-existing-id")
+        );
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 5);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "2");
+        assertEquals(cases.get(2).getId(), "3");
+        assertEquals(cases.get(3).getId(), "4");
+        assertEquals(cases.get(4).getId(), "5");
     }
 }
