@@ -14,7 +14,7 @@
                 <input type="text" value="@?details.getId()" hidden="" name="id" class="d-none" id="id-input">
                 <div class="form-group">
                     <label for="currentStageId">Стадія розгляду</label>
-                    <input type="text" class="form-control" id="currentStageId" name="currentStage">
+                    <input type="text" id="currentStageId" name="currentStage" value="@?details.getCurrentStage()" class="form-control">
                 </div>
 
                 <div class="form-group mb-2">
@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                     <label for="doneWorkId">Проведена робота</label>
-                    <textarea class="form-control" id="doneWorkId" name="doneWork" rows="3">@?details.getDoneWork()</textarea>
+                    <textarea class="form-control" id="doneWorkId" name="doneWork" rows="8">@?details.getDoneWork()</textarea>
                 </div>
 
 

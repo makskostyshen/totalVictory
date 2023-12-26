@@ -4,6 +4,7 @@ import com.makskostyshen.data.entity.CaseEntity;
 import com.makskostyshen.data.impl.CSVReader;
 import com.makskostyshen.data.impl.CSVWriter;
 import com.makskostyshen.data.impl.CaseRepositoryImpl;
+import com.makskostyshen.data.impl.DataLayerMapper;
 import io.micronaut.context.annotation.Property;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -35,11 +36,11 @@ class CaseRepositoryTest {
                 null
         );
         List<CaseEntity> initCases = initRepository.findAll();
-        writer.write(initCases);
+        writer.write(initCases.stream().map(DataLayerMapper.I::map).toList());
     }
 
     @Test
-    void shouldSaveCaseWithNoDateAndTimeInTheEnd() {
+    void shouldSaveNewCaseWithNoDateAndTimeInTheEnd() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -61,7 +62,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithNoDateBeforeCasesWithNoDateAndTime() {
+    void shouldSaveNewCaseWithNoDateBeforeCasesWithNoDateAndTime() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -84,7 +85,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithSmallestDateInTheBeginning() {
+    void shouldSaveNewCaseWithSmallestDateInTheBeginning() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -107,7 +108,7 @@ class CaseRepositoryTest {
     }
 
     @Test
-    void shouldSaveCaseWithRepeatingDateButDifferentTimeCorrectly() {
+    void shouldSaveNewCaseWithRepeatingDateButDifferentTimeCorrectly() {
         //given
         loadInitCases();
         CaseEntity caseEntity = CaseEntity.builder()
@@ -126,6 +127,81 @@ class CaseRepositoryTest {
         assertEquals(cases.get(1).getId(), "2");
         assertEquals(cases.get(2).getId(), "3");
         assertEquals(cases.get(3).getId(), "6");
+        assertEquals(cases.get(4).getId(), "4");
+        assertEquals(cases.get(5).getId(), "5");
+    }
+
+    @Test
+    void shouldUpdateCaseWithNoChangingDeadline() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("4")
+                .note("note")
+                .judge("judge")
+                .currentStageDeadlineDate(LocalDate.of(2023, 12, 16))
+                .currentStageDeadlineTime(LocalTime.of(0, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 5);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "2");
+        assertEquals(cases.get(2).getId(), "3");
+        assertEquals(cases.get(4).getId(), "5");
+
+        assertEquals(cases.get(3).getId(), "4");
+        assertEquals(cases.get(3).getNote(), "note");
+        assertEquals(cases.get(3).getJudge(), "judge");
+    }
+
+    @Test
+    void shouldUpdateCaseWithChangingDeadline() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("4")
+                .currentStageDeadlineDate(LocalDate.of(2023, 10, 3))
+                .currentStageDeadlineTime(LocalTime.of(11, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 5);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "4");
+        assertEquals(cases.get(2).getId(), "2");
+        assertEquals(cases.get(3).getId(), "3");
+        assertEquals(cases.get(4).getId(), "5");
+    }
+
+    @Test
+    void shouldCreateCaseWithSpecifiedId() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("not-existent-id")
+                .currentStageDeadlineDate(LocalDate.of(2023, 10, 3))
+                .currentStageDeadlineTime(LocalTime.of(11, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 6);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "not-existent-id");
+        assertEquals(cases.get(2).getId(), "2");
+        assertEquals(cases.get(3).getId(), "3");
         assertEquals(cases.get(4).getId(), "4");
         assertEquals(cases.get(5).getId(), "5");
     }

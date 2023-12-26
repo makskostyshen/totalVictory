@@ -1,6 +1,9 @@
 package com.makskostyshen.web.controller;
 
 import com.makskostyshen.data.api.CaseRepository;
+import com.makskostyshen.data.entity.CaseEntity;
+import com.makskostyshen.exception.CaseNotFoundException;
+import com.makskostyshen.web.WebLayerMapper;
 import com.makskostyshen.web.dto.CaseDetailsDto;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -16,15 +19,20 @@ public class CaseDetailsController {
     @Get("/{id}")
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> get(@PathVariable final String id) {
-        System.out.println("id is " + id);
-        return HttpResponse.ok(new RockerWritable(views.caseDetails.template(CaseDetailsDto.builder().build())));
+        CaseEntity caseEntity = repository.findById(id).orElseThrow(CaseNotFoundException::new);
+        return HttpResponse.ok(
+                new RockerWritable(
+                        views.caseDetails.template(
+                                WebLayerMapper.I.mapToDetails(caseEntity))
+                )
+        );
     }
 
     @Post
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public HttpResponse<?> post(@Body CaseDetailsDto caseDetailsDto) {
-        System.out.println("id is " + caseDetailsDto.getId());
+    public HttpResponse<?> post(@Body final CaseDetailsDto caseDetailsDto) {
+        repository.save(WebLayerMapper.I.map(caseDetailsDto));
         return HttpResponse.seeOther(UriBuilder.of("/cases").build());
     }
 }

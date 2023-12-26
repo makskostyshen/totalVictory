@@ -6,10 +6,7 @@ import com.makskostyshen.exception.CasePersistenceException;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,12 +36,26 @@ public class CaseRepositoryImpl implements CaseRepository {
         }
     }
 
+    @Override
+    public Optional<CaseEntity> findById(String id) {
+        List<CaseEntity> sameIdCases = getAllEntitiesStream()
+                .filter(caseEntity -> caseEntity.getId().equals(id))
+                .toList();
+
+        if (sameIdCases.size() > 1) {
+            throw new CasePersistenceException("There is a problem with case ids");
+        }
+        return sameIdCases.isEmpty()
+                ? Optional.empty()
+                : Optional.of(sameIdCases.get(0));
+    }
+
     private void saveNewCase(final CaseEntity caseEntity) {
         List<CaseEntity> allCases = getAllEntitiesStream().collect(Collectors.toCollection(ArrayList::new));
         caseEntity.setId(UUID.randomUUID().toString());
         allCases.add(caseEntity);
         allCases.sort(DATE_COMPARATOR);
-        writer.write(allCases);
+        writer.write(allCases.stream().map(DataLayerMapper.I::map).toList());
     }
 
     private void saveUpdatedCase(final CaseEntity caseEntity) {
@@ -65,7 +76,7 @@ public class CaseRepositoryImpl implements CaseRepository {
 
         differentIdCases.add(caseEntity);
         differentIdCases.sort(DATE_COMPARATOR);
-        writer.write(differentIdCases);
+        writer.write(differentIdCases.stream().map(DataLayerMapper.I::map).toList());
     }
 
     private Stream<CaseEntity> getAllEntitiesStream() {
