@@ -1,0 +1,6 @@
+"CLIENT","CURRENT_STAGE","CURRENT_STAGE_DEADLINE_DATE","CURRENT_STAGE_DEADLINE_TIME","DONE_WORK","ID","JUDGE","NOTE","NUMBER","OPPONENT","SUBJECT"
+cl1,s1,"2023-10-03","09:30",w1,1,j1,n1,num1,o1,s1
+cl2,"","2023-10-03","",w2,2,j2,n2,num2,o2,s2
+cl3,s3,"2023-12-01","12:00",w3,3,j3,n3,num3,n3,s3
+cl4,s4,"2023-12-16","00:00",w4,4,j4,n4,num4,n4,s4
+cl5,"","","",w5,5,j5,n5,num5,n5,s5
