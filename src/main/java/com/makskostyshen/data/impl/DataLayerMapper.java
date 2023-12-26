@@ -1,6 +1,7 @@
 package com.makskostyshen.data.impl;
 
 import com.makskostyshen.data.entity.CaseEntity;
+import org.mapstruct.Condition;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -19,16 +20,10 @@ public abstract class DataLayerMapper {
     public abstract CaseCsvModel map(final CaseEntity caseEntity);
 
     protected LocalDate mapToLocalDate(final String dateValue) {
-        if (dateValue == null || dateValue.isEmpty()) {
-            return null;
-        }
         return LocalDate.parse(dateValue, dateFormatter);
     }
 
     protected LocalTime mapToLocalTime(final String timeValue) {
-        if (timeValue == null || timeValue.isEmpty()) {
-            return null;
-        }
         return LocalTime.parse(timeValue, timeFormatter);
     }
 
@@ -44,5 +39,10 @@ public abstract class DataLayerMapper {
             return null;
         }
         return time.format(timeFormatter);
+    }
+
+    @Condition
+    protected boolean isNotEmpty(String value) {
+        return value != null && !value.isEmpty();
     }
 }

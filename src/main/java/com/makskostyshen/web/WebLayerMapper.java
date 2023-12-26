@@ -5,6 +5,9 @@ import com.makskostyshen.web.dto.CaseDetailsDto;
 import com.makskostyshen.web.dto.CaseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Condition;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDate;
@@ -12,37 +15,41 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-@Mapper
+@Mapper(
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
+)
 public abstract class WebLayerMapper {
     public static WebLayerMapper I = Mappers.getMapper(WebLayerMapper.class);
 
-    private final String EMPTY_FIELD_VALUE = "...";
+    private final String EMPTY_FIELD_VALUE = "";
 
     private final DateTimeFormatter dateTimeDisplayFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
     private final DateTimeFormatter dateDisplayFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final DateTimeFormatter standardSystemDateFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
     private final DateTimeFormatter standardSystemTimeFormatter = DateTimeFormatter.ISO_TIME;
 
+    public CaseDto map(final CaseEntity entity) {
+        return map(entity, createBlankCaseDto());
+    }
+
+    public CaseDetailsDto mapToDetails(CaseEntity entity) {
+        return mapToDetails(entity, createBlankCaseDetailsDto());
+    }
+
     @Mapping(
             target = "currentStageDeadline",
             expression = "java(mapDeadline(entity.getCurrentStageDeadlineDate(), entity.getCurrentStageDeadlineTime()))")
-    public abstract CaseDto map(final CaseEntity entity);
+    public abstract CaseDto map(final CaseEntity entity, @MappingTarget CaseDto dto);
 
     public abstract CaseEntity map(final CaseDetailsDto detailsDto);
 
-    public abstract CaseDetailsDto mapToDetails(CaseEntity caseEntity);
+    public abstract CaseDetailsDto mapToDetails(CaseEntity entity, @MappingTarget CaseDetailsDto dto);
 
     protected LocalDate mapToLocalDate(final String dateValue) {
-        if (dateValue == null || dateValue.isEmpty()) {
-            return null;
-        }
         return LocalDate.parse(dateValue, standardSystemDateFormatter);
     }
 
     protected LocalTime mapToLocalTime(final String timeValue) {
-        if (timeValue == null || timeValue.isEmpty()) {
-            return null;
-        }
         return LocalTime.parse(timeValue, standardSystemTimeFormatter);
     }
 
@@ -71,9 +78,43 @@ public abstract class WebLayerMapper {
     }
 
     protected String map(final String stringField) {
-        if (stringField.isEmpty()) {
-            return EMPTY_FIELD_VALUE;
-        }
         return stringField;
     }
+
+    @Condition
+    protected boolean isNotEmpty(String value) {
+        return value != null && !value.isEmpty();
+    }
+
+    private CaseDto createBlankCaseDto() {
+        return CaseDto.builder()
+                .id(EMPTY_FIELD_VALUE)
+                .client(EMPTY_FIELD_VALUE)
+                .opponent(EMPTY_FIELD_VALUE)
+                .subject(EMPTY_FIELD_VALUE)
+                .number(EMPTY_FIELD_VALUE)
+                .judge(EMPTY_FIELD_VALUE)
+                .note(EMPTY_FIELD_VALUE)
+                .currentStage(EMPTY_FIELD_VALUE)
+                .currentStageDeadline(EMPTY_FIELD_VALUE)
+                .doneWork(EMPTY_FIELD_VALUE)
+                .build();
+    }
+
+    private CaseDetailsDto createBlankCaseDetailsDto() {
+        return CaseDetailsDto.builder()
+                .id(EMPTY_FIELD_VALUE)
+                .client(EMPTY_FIELD_VALUE)
+                .opponent(EMPTY_FIELD_VALUE)
+                .subject(EMPTY_FIELD_VALUE)
+                .number(EMPTY_FIELD_VALUE)
+                .judge(EMPTY_FIELD_VALUE)
+                .note(EMPTY_FIELD_VALUE)
+                .currentStage(EMPTY_FIELD_VALUE)
+                .currentStageDeadlineDate(EMPTY_FIELD_VALUE)
+                .currentStageDeadlineTime(EMPTY_FIELD_VALUE)
+                .doneWork(EMPTY_FIELD_VALUE)
+                .build();
+    }
+
 }

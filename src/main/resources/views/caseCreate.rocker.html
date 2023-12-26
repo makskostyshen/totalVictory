@@ -3,6 +3,11 @@
 @views.caseDetailsBase.template(
     CaseDetailsDto.builder().build(),
     "Нова справа",
-    "/cases/create",
-    "Створити"
-)
+    "/cases/create"
+) -> {
+<div class="row">
+    <div class="text-right">
+        <input type="submit" class="btn btn-primary btn-block" value="Створити">
+    </div>
+</div>
+}

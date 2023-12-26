@@ -2,6 +2,7 @@ package com.makskostyshen.data.impl;
 
 import com.makskostyshen.data.api.CaseRepository;
 import com.makskostyshen.data.entity.CaseEntity;
+import com.makskostyshen.exception.CaseNotFoundException;
 import com.makskostyshen.exception.CasePersistenceException;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class CaseRepositoryImpl implements CaseRepository {
 
     @Override
     public void save(final CaseEntity caseEntity) {
-        if (caseEntity.getId() == null) {
+        if (caseEntity.getId() == null || caseEntity.getId().isEmpty()) {
             saveNewCase(caseEntity);
         } else {
             saveUpdatedCase(caseEntity);
@@ -37,7 +38,7 @@ public class CaseRepositoryImpl implements CaseRepository {
     }
 
     @Override
-    public Optional<CaseEntity> findById(String id) {
+    public Optional<CaseEntity> findById(final String id) {
         List<CaseEntity> sameIdCases = getAllEntitiesStream()
                 .filter(caseEntity -> caseEntity.getId().equals(id))
                 .toList();
@@ -48,6 +49,30 @@ public class CaseRepositoryImpl implements CaseRepository {
         return sameIdCases.isEmpty()
                 ? Optional.empty()
                 : Optional.of(sameIdCases.get(0));
+    }
+
+    @Override
+    public void deleteById(final String id) {
+        List<CaseEntity> sameIdCases = new ArrayList<>();
+        List<CaseEntity> differentIdCases = new ArrayList<>();
+
+        getAllEntitiesStream().forEach(entity -> {
+            if (entity.getId().equals(id)) {
+                sameIdCases.add(entity);
+            } else {
+                differentIdCases.add(entity);
+            }
+        });
+
+        if (sameIdCases.size() > 1) {
+            throw new CasePersistenceException("There is a problem with case ids");
+        }
+
+        if (sameIdCases.isEmpty()) {
+            throw new CaseNotFoundException();
+        }
+        differentIdCases.sort(DATE_COMPARATOR);
+        writer.write(differentIdCases.stream().map(DataLayerMapper.I::map).toList());
     }
 
     private void saveNewCase(final CaseEntity caseEntity) {
