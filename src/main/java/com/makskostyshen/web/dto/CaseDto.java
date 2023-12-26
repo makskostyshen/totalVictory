@@ -11,6 +11,8 @@ import lombok.*;
 @ToString
 @Serdeable
 public class CaseDto {
+    private String id;
+
     private String client;
 
     private String opponent;

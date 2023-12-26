@@ -10,15 +10,15 @@ import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.views.rocker.RockerWritable;
 import lombok.RequiredArgsConstructor;
 
-@Controller("/cases/create")
+@Controller("/cases/details")
 @RequiredArgsConstructor
-public class CasesCreationController {
+public class CaseDetailsController {
     private final CaseRepository repository;
-
-    @Get
+    @Get("/{id}")
     @Produces(MediaType.TEXT_HTML)
-    public HttpResponse<?> get() {
-        return HttpResponse.ok(new RockerWritable(views.caseCreate.template()));
+    public HttpResponse<?> get(@PathVariable final String id) {
+        System.out.println("id is " + id);
+        return HttpResponse.ok(new RockerWritable(views.caseDetails.template(CaseDetailsDto.builder().build())));
     }
 
     @Post
