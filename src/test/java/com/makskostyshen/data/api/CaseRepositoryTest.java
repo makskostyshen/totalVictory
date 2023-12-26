@@ -130,4 +130,79 @@ class CaseRepositoryTest {
         assertEquals(cases.get(4).getId(), "4");
         assertEquals(cases.get(5).getId(), "5");
     }
+
+    @Test
+    void shouldUpdateCaseWithNoChangingDeadline() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("4")
+                .note("note")
+                .judge("judge")
+                .currentStageDeadlineDate(LocalDate.of(2023, 12, 16))
+                .currentStageDeadlineTime(LocalTime.of(0, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 5);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "2");
+        assertEquals(cases.get(2).getId(), "3");
+        assertEquals(cases.get(4).getId(), "5");
+
+        assertEquals(cases.get(3).getId(), "4");
+        assertEquals(cases.get(3).getNote(), "note");
+        assertEquals(cases.get(3).getJudge(), "judge");
+    }
+
+    @Test
+    void shouldUpdateCaseWithChangingDeadline() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("4")
+                .currentStageDeadlineDate(LocalDate.of(2023, 10, 3))
+                .currentStageDeadlineTime(LocalTime.of(11, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 5);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "4");
+        assertEquals(cases.get(2).getId(), "2");
+        assertEquals(cases.get(3).getId(), "3");
+        assertEquals(cases.get(4).getId(), "5");
+    }
+
+    @Test
+    void shouldCreateCaseWithSpecifiedId() {
+        //given
+        loadInitCases();
+        CaseEntity caseEntity = CaseEntity.builder()
+                .id("not-existent-id")
+                .currentStageDeadlineDate(LocalDate.of(2023, 10, 3))
+                .currentStageDeadlineTime(LocalTime.of(11, 0))
+                .build();
+
+        //when
+        repository.save(caseEntity);
+
+        //then
+        List<CaseEntity> cases = repository.findAll();
+        assertEquals(cases.size(), 6);
+        assertEquals(cases.get(0).getId(), "1");
+        assertEquals(cases.get(1).getId(), "not-existent-id");
+        assertEquals(cases.get(2).getId(), "2");
+        assertEquals(cases.get(3).getId(), "3");
+        assertEquals(cases.get(4).getId(), "4");
+        assertEquals(cases.get(5).getId(), "5");
+    }
 }
