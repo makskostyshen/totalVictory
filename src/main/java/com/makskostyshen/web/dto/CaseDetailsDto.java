@@ -12,6 +12,8 @@ import lombok.*;
 @Serdeable
 
 public class CaseDetailsDto {
+    private String id;
+
     private String client;
 
     private String opponent;

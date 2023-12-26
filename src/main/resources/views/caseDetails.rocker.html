@@ -1,0 +1,10 @@
+@import com.makskostyshen.web.dto.CaseDetailsDto;
+
+@args(CaseDetailsDto details)
+
+@views.caseDetailsBase.template(
+    details,
+    "Перегляд справи",
+    "/cases/details/details.getId()",
+    "Створити"
+)
