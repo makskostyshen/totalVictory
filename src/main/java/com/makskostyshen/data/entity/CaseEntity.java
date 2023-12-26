@@ -2,7 +2,8 @@ package com.makskostyshen.data.entity;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Builder
 @Getter
@@ -27,7 +28,9 @@ public class CaseEntity {
 
     private String currentStage;
 
-    private LocalDateTime currentStageDeadline;
+    private LocalDate currentStageDeadlineDate;
+
+    private LocalTime currentStageDeadlineTime;
 
     private String note;
 }

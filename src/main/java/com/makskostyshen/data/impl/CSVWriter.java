@@ -1,7 +1,7 @@
 package com.makskostyshen.data.impl;
 
 import com.makskostyshen.data.entity.CaseEntity;
-import com.makskostyshen.exception.CSVReadException;
+import com.makskostyshen.exception.CSVWriteException;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -28,7 +28,7 @@ public class CSVWriter {
             beanToCsv.write(cases.stream().map(DataLayerMapper.I::map).toList());
             writer.close();
         } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
-            throw new CSVReadException(e);
+            throw new CSVWriteException(e);
         }
     }
 }

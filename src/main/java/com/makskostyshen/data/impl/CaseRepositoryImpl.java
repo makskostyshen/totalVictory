@@ -2,6 +2,7 @@ package com.makskostyshen.data.impl;
 
 import com.makskostyshen.data.api.CaseRepository;
 import com.makskostyshen.data.entity.CaseEntity;
+import com.makskostyshen.exception.CasePersistenceException;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
@@ -19,10 +20,13 @@ public class CaseRepositoryImpl implements CaseRepository {
     private final CSVReader reader;
 
     private final CSVWriter writer;
+
+    private static final Comparator<CaseEntity> DATE_COMPARATOR =
+            Comparator.comparing(CaseEntity::getCurrentStageDeadlineDate, Comparator.nullsLast(Comparator.naturalOrder()))
+                    .thenComparing(CaseEntity::getCurrentStageDeadlineTime, Comparator.nullsLast(Comparator.naturalOrder()));
     @Override
     public List<CaseEntity> findAll() {
         return getAllEntitiesStream()
-                .sorted(Comparator.comparing(CaseEntity::getCurrentStageDeadline, Comparator.nullsLast(Comparator.naturalOrder())))
                 .toList();
     }
 
@@ -39,6 +43,7 @@ public class CaseRepositoryImpl implements CaseRepository {
         List<CaseEntity> allCases = getAllEntitiesStream().collect(Collectors.toCollection(ArrayList::new));
         caseEntity.setId(UUID.randomUUID().toString());
         allCases.add(caseEntity);
+        allCases.sort(DATE_COMPARATOR);
         writer.write(allCases);
     }
 
@@ -54,11 +59,12 @@ public class CaseRepositoryImpl implements CaseRepository {
             }
         });
 
-        if (sameIdCases.size() != 1) {
-            throw new RuntimeException();
+        if (sameIdCases.size() > 1) {
+            throw new CasePersistenceException("There is a problem with case ids");
         }
 
         differentIdCases.add(caseEntity);
+        differentIdCases.sort(DATE_COMPARATOR);
         writer.write(differentIdCases);
     }
 
