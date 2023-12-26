@@ -26,9 +26,9 @@ public class CaseDetailsDto {
 
     private String currentStage;
 
-    private String deadlineDate;
+    private String currentStageDeadlineDate;
 
-    private String deadlineTime;
+    private String currentStageDeadlineTime;
 
     private String note;
 }

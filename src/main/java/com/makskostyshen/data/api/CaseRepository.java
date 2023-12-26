@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CaseRepository {
     List<CaseEntity> findAll();
+
+    void save(CaseEntity caseEntity);
 }
