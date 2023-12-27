@@ -26,6 +26,6 @@ public class CasesCreationController {
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> post(@Body final CaseDetailsDto caseDetailsDto) {
         repository.save(WebLayerMapper.I.map(caseDetailsDto));
-        return HttpResponse.seeOther(UriBuilder.of("/cases").build());
+        return HttpResponse.seeOther(UriBuilder.of(CasesListingController.PATH).build());
     }
 }

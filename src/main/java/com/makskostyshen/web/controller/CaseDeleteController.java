@@ -38,6 +38,6 @@ public class CaseDeleteController {
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> post(@PathVariable final String id) {
         repository.deleteById(id);
-        return HttpResponse.seeOther(UriBuilder.of("/cases").build());
+        return HttpResponse.seeOther(UriBuilder.of(CasesListingController.PATH).build());
     }
 }
