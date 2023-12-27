@@ -27,7 +27,7 @@ public class CaseDeleteController {
         CaseEntity caseEntity = repository.findById(id).orElseThrow(CaseNotFoundException::new);
         return HttpResponse.ok(
                 new RockerWritable(
-                        views.caseConfirmDelete.template(
+                        views.cases.caseConfirmDelete.template(
                                 WebLayerMapper.I.mapToDetails(caseEntity))
                 )
         );

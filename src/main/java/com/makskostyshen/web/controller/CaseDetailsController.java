@@ -22,7 +22,7 @@ public class CaseDetailsController {
         CaseEntity caseEntity = repository.findById(id).orElseThrow(CaseNotFoundException::new);
         return HttpResponse.ok(
                 new RockerWritable(
-                        views.caseDetails.template(
+                        views.cases.caseDetails.template(
                                 WebLayerMapper.I.mapToDetails(caseEntity))
                 )
         );

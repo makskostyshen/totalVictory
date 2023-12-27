@@ -18,7 +18,7 @@ public class CasesCreationController {
     @Get
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> get() {
-        return HttpResponse.ok(new RockerWritable(views.caseCreate.template()));
+        return HttpResponse.ok(new RockerWritable(views.cases.caseCreate.template()));
     }
 
     @Post

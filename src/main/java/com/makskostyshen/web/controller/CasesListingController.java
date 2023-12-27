@@ -27,6 +27,6 @@ public class CasesListingController {
                 .map(WebLayerMapper.I::map)
                 .toList();
 
-        return HttpResponse.ok(new RockerWritable(views.casesListing.template(cases)));
+        return HttpResponse.ok(new RockerWritable(views.cases.casesListing.template(cases)));
     }
 }
