@@ -1,7 +1,12 @@
 package com.makskostyshen.web.dto;
 
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @Getter
@@ -19,6 +24,8 @@ public class CaseDto {
 
     private String subject;
 
+    private String price;
+
     private String number;
 
     private String judge;
@@ -28,6 +35,8 @@ public class CaseDto {
     private String currentStage;
 
     private String currentStageDeadline;
+
+    private String execution;
 
     private String note;
 }
