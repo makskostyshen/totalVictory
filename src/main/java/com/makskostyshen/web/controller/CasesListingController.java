@@ -12,11 +12,13 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import static com.makskostyshen.web.controller.CasesListingController.PATH;
 import static io.micronaut.http.MediaType.TEXT_HTML;
 
-@Controller("/cases")
+@Controller(PATH)
 @RequiredArgsConstructor
 public class CasesListingController {
+    static final String PATH = "/cases";
 
     private final CaseRepository repository;
     @Get
@@ -27,6 +29,6 @@ public class CasesListingController {
                 .map(WebLayerMapper.I::map)
                 .toList();
 
-        return HttpResponse.ok(new RockerWritable(views.casesListing.template(cases)));
+        return HttpResponse.ok(new RockerWritable(views.cases.casesListing.template(cases)));
     }
 }

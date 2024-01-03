@@ -22,7 +22,7 @@ public class CaseDetailsController {
         CaseEntity caseEntity = repository.findById(id).orElseThrow(CaseNotFoundException::new);
         return HttpResponse.ok(
                 new RockerWritable(
-                        views.caseDetails.template(
+                        views.cases.caseDetails.template(
                                 WebLayerMapper.I.mapToDetails(caseEntity))
                 )
         );
@@ -33,6 +33,6 @@ public class CaseDetailsController {
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> post(@Body final CaseDetailsDto caseDetailsDto) {
         repository.save(WebLayerMapper.I.map(caseDetailsDto));
-        return HttpResponse.seeOther(UriBuilder.of("/cases").build());
+        return HttpResponse.seeOther(UriBuilder.of(CasesListingController.PATH).build());
     }
 }

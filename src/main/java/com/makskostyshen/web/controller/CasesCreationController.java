@@ -18,7 +18,7 @@ public class CasesCreationController {
     @Get
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> get() {
-        return HttpResponse.ok(new RockerWritable(views.caseCreate.template()));
+        return HttpResponse.ok(new RockerWritable(views.cases.caseCreate.template()));
     }
 
     @Post
@@ -26,6 +26,6 @@ public class CasesCreationController {
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse<?> post(@Body final CaseDetailsDto caseDetailsDto) {
         repository.save(WebLayerMapper.I.map(caseDetailsDto));
-        return HttpResponse.seeOther(UriBuilder.of("/cases").build());
+        return HttpResponse.seeOther(UriBuilder.of(CasesListingController.PATH).build());
     }
 }
