@@ -92,12 +92,14 @@ public abstract class WebLayerMapper {
                 .client(EMPTY_FIELD_VALUE)
                 .opponent(EMPTY_FIELD_VALUE)
                 .subject(EMPTY_FIELD_VALUE)
+                .price(EMPTY_FIELD_VALUE)
                 .number(EMPTY_FIELD_VALUE)
                 .judge(EMPTY_FIELD_VALUE)
-                .note(EMPTY_FIELD_VALUE)
+                .doneWork(EMPTY_FIELD_VALUE)
                 .currentStage(EMPTY_FIELD_VALUE)
                 .currentStageDeadline(EMPTY_FIELD_VALUE)
-                .doneWork(EMPTY_FIELD_VALUE)
+                .execution(EMPTY_FIELD_VALUE)
+                .note(EMPTY_FIELD_VALUE)
                 .build();
     }
 
@@ -107,14 +109,15 @@ public abstract class WebLayerMapper {
                 .client(EMPTY_FIELD_VALUE)
                 .opponent(EMPTY_FIELD_VALUE)
                 .subject(EMPTY_FIELD_VALUE)
+                .price(EMPTY_FIELD_VALUE)
                 .number(EMPTY_FIELD_VALUE)
                 .judge(EMPTY_FIELD_VALUE)
-                .note(EMPTY_FIELD_VALUE)
+                .doneWork(EMPTY_FIELD_VALUE)
                 .currentStage(EMPTY_FIELD_VALUE)
                 .currentStageDeadlineDate(EMPTY_FIELD_VALUE)
                 .currentStageDeadlineTime(EMPTY_FIELD_VALUE)
-                .doneWork(EMPTY_FIELD_VALUE)
+                .execution(EMPTY_FIELD_VALUE)
+                .note(EMPTY_FIELD_VALUE)
                 .build();
     }
-
 }

@@ -20,6 +20,8 @@ public class CaseEntity {
 
     private String subject;
 
+    private String price;
+
     private String number;
 
     private String judge;
@@ -31,6 +33,8 @@ public class CaseEntity {
     private LocalDate currentStageDeadlineDate;
 
     private LocalTime currentStageDeadlineTime;
+
+    private String execution;
 
     private String note;
 }

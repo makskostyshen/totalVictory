@@ -22,6 +22,9 @@ public class CaseCsvModel {
     @CsvBindByName(column = "subject")
     private String subject;
 
+    @CsvBindByName(column = "price")
+    private String price;
+
     @CsvBindByName(column = "number")
     private String number;
 
@@ -39,6 +42,9 @@ public class CaseCsvModel {
 
     @CsvBindByName(column = "current_stage_deadline_time")
     private String currentStageDeadlineTime;
+
+    @CsvBindByName(column = "execution") //todo: understand correct representation
+    private String execution;
 
     @CsvBindByName(column = "note")
     private String note;
