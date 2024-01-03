@@ -1,6 +1,5 @@
 package com.makskostyshen.data.impl;
 
-import com.makskostyshen.data.entity.CaseEntity;
 import com.makskostyshen.exception.CSVWriteException;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
@@ -12,6 +11,7 @@ import jakarta.inject.Singleton;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Singleton
@@ -23,7 +23,7 @@ public class CSVWriter {
     public void write(final List<CaseCsvModel> cases) {
 
         try {
-            Writer writer = new FileWriter(fileName);
+            Writer writer = new FileWriter(fileName, StandardCharsets.UTF_8);
             StatefulBeanToCsv<CaseCsvModel> beanToCsv = new StatefulBeanToCsvBuilder<CaseCsvModel>(writer).build();
             beanToCsv.write(cases);
             writer.close();
