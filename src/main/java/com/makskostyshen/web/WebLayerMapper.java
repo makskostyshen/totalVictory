@@ -98,7 +98,7 @@ public abstract class WebLayerMapper {
                 .doneWork(EMPTY_FIELD_VALUE)
                 .currentStage(EMPTY_FIELD_VALUE)
                 .currentStageDeadline(EMPTY_FIELD_VALUE)
-                .execution(EMPTY_FIELD_VALUE)
+                .orderStatus(EMPTY_FIELD_VALUE)
                 .note(EMPTY_FIELD_VALUE)
                 .build();
     }
@@ -116,7 +116,7 @@ public abstract class WebLayerMapper {
                 .currentStage(EMPTY_FIELD_VALUE)
                 .currentStageDeadlineDate(EMPTY_FIELD_VALUE)
                 .currentStageDeadlineTime(EMPTY_FIELD_VALUE)
-                .execution(EMPTY_FIELD_VALUE)
+                .orderStatus(EMPTY_FIELD_VALUE)
                 .note(EMPTY_FIELD_VALUE)
                 .build();
     }
