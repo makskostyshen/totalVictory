@@ -28,13 +28,13 @@ public class CaseEntity {
 
     private String doneWork;
 
-    private String currentStage;
+    private CaseStage currentStage;
 
     private LocalDate currentStageDeadlineDate;
 
     private LocalTime currentStageDeadlineTime;
 
-    private String execution;
+    private CaseOrderStatus orderStatus;
 
     private String note;
 }

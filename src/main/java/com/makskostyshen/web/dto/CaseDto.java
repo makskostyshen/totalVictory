@@ -36,7 +36,7 @@ public class CaseDto {
 
     private String currentStageDeadline;
 
-    private String execution;
+    private String orderStatus;
 
     private String note;
 }

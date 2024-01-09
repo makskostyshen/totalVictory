@@ -39,7 +39,7 @@ public class CaseDetailsDto {
 
     private String currentStageDeadlineTime;
 
-    private String execution;
+    private String orderStatus;
 
     private String note;
 }
